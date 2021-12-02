@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/el-proyecte-grande-prototype-general-Andrassyattila.iml" filepath="$PROJECT_DIR$/.idea/el-proyecte-grande-prototype-general-Andrassyattila.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tradingproject/tradingproject.iml" filepath="$PROJECT_DIR$/tradingproject/tradingproject.iml" />
+    </modules>
+  </component>
+</project>

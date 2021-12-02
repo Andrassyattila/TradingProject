@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trading Project</title>
+
+    <div th:replace="header.html :: head"></div>
+</head>
+<body>
+<div th:replace="header.html :: copy"></div>
+
+<div class="cont">
+
+    <div class="main-content">
+        <div><h2>Marketplace</h2></div>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col" th:each="product:${products}">
+                    <a th:href="@{/product/{id}(id=${product.id})}">
+                        <div class="card">
+                            <img class="card-img-top" th:src="@{Images/products/{id}/{image}(id=${product.id},image=${product.getImage()})}" />
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${product.title}"></h5>
+                                <p class="card-text" th:text="${product.prefPrice}"></p>
+                                    <div  sec:authorize="isAuthenticated()" class="login">
+                                        <form th:method="post" th:action="@{/newmessage/{myid}/{userid}(myid=${user.getId()},userid=${product.getUsers().getId()})}">
+                                            <button th:if="${user.getId() != product.getUsers().getId()}" class="btn btn-primary" type="submit">Message</button>
+                                        </form>
+                                    </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+    </div>
+
+
+    <div class="side-content">
+        <div class="border">
+        <label style="margin-bottom: 5px;">Latest items</label>
+        <div th:each="adv:${lastFive}">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img id="event" th:src="@{Images/products/{id}/{image}(id=${adv.id},image=${adv.getImage()})}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${adv.title}"></h5>
+                            <p class="card-text"><small class="text-muted" th:text="'The product uploaded at '+${#dates.format(adv.getPublicationDate(),'yyyy-MM-dd HH:mm')}"></small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+</body>
+<div th:replace="footer.html :: copy"></div>
+</html>

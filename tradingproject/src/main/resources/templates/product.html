@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <div th:replace="header.html :: head"></div>
+</head>
+<body>
+<div th:replace="header.html :: copy"></div>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-sm-center">
+        <div class="card">
+
+            <img class="card-img-top" th:src="${url}">
+
+        <p th:text="'Product title:'+ ${product.title}"></p>
+        <p th:text="'Description: '+${product.description}"></p>
+        <p th:text="'Prefered price:'+${product.prefPrice}"></p>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>

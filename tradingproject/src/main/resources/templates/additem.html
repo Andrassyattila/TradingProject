@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new item</title>
+    <div th:replace="header.html :: head"></div>
+</head>
+<body class="text-center">
+<div th:replace="header.html :: copy"></div>
+    <div class="container">
+        <div>
+            <div class="title"><h1>Advertise</h1></div>
+                <form class="row g-3" th:action="@{/add}"
+                      th:object="${product}" method="post"
+                      enctype="multipart/form-data">
+                    <div class="col-md-4">
+                        <input type="file" name="imageFile">
+
+                    </div>
+                    <div class="col-md-4">
+                        <label for="title" class="form-label">Title:</label>
+                        <input type="text" class="form-control" id="title" th:field="*{title}" th:name="title">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="prefprice" class="form-label">Preferred price:</label>
+                        <input type="number" class="form-control" id="prefprice" th:field="*{prefPrice}" name="prefprice">
+                    </div>
+                    <div class="col-8">
+                        <label for="description" class="form-label">Item description:</label>
+                        <textarea class="form-control" id="description" th:field="*{description}" th:name="description"></textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="inputState" class="form-label">What are you interested in?:</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Choose...</option>
+                            <div th:each="category:${categories}" >
+                                <option th:value="${category.id}"><p th:text="${category.name}"></p></option>
+                            </div>
+
+                        </select>
+                    </div>
+
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Post item</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</body>
+</html>

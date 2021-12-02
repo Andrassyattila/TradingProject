@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <div th:replace="header.html :: head"></div>
+    <link rel="stylesheet"  th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+</head>
+<body class="text-center">
+<div th:replace="header.html :: copy"></div>
+<div class="container">
+    <div class="row row-padding">
+    <div class="row gutters-sm" style="float: left">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img th:src="@{https://github.com/mdo.png}" alt="Admin" class="rounded-circle" width="150">
+                        <div class="mt-3">
+                            <div th:if="${!isMyProfile}">
+                                <h4 th:text="${user.username}+'\'s profile'"> profile</h4>
+                            </div>
+                            <div th:if="${isMyProfile}">
+                                <h4 th:text="${user.username}">John Doe</h4>
+                            </div>
+                            <div class="rating">
+                                <div th:if="${user.rating &lt; 1 }">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                                <div th:if="${user.rating &gt; 1 and user.rating &lt;2}">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                                <div th:if="${user.rating &gt; 2 and user.rating &lt;3}">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                                <div th:if="${user.rating &gt; 3 and user.rating &lt;4}">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                                <div th:if="${user.rating &gt;4 and user.rating &lt;4.9}">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                                <div th:if="${user.rating == 5}">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                </div>
+                            </div>
+                            <div th:if="${!isMyProfile}">
+                                <form method="post" th:action="@{/profile/rating/{id}(id=${user.getId})}">
+                                    <p>Your rating:</p>
+                                    <input type="radio" id="rating1" name="rating" value="1">
+                                    <label for="rating1">1</label>
+                                    <input type="radio" id="rating2" name="rating" value="2">
+                                    <label for="rating2">2</label>
+                                    <input type="radio" id="rating3" name="rating" value="3">
+                                    <label for="rating3">3</label>
+                                    <input type="radio" id="rating4" name="rating" value="4">
+                                    <label for="rating4">4</label>
+                                    <input type="radio" id="rating5" name="rating" value="5">
+                                    <label for="rating5">5</label><br><br>
+                                    <input type="submit" value="Submit">
+                                </form>
+                            </div>
+                            <button class="btn btn-outline-primary">Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="personal-info">
+                <div class="col-md-8">
+                    <div class="card mb-5" style="width: 400px">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <p th:text="${user.getFirstName()}+${user.getSurName()}">Kenneth Valdez</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <p th:text="${user.getEmail()}"></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <div th:if="${isMyProfile}">
+                                        <p th:text="${user.getPhoneNumber()}"></p>
+                                    </div>
+                                    <div th:if="${!isMyProfile}">
+                                        <p th:text="xx-xxxxxxx"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                        <p th:text="${user.getPostcode()}+' '+${user.getCity()}"></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div th:if="${isMyProfile}" class="row">
+                                <div class="col-sm-12">
+
+                                    <a class="btn btn-info " target="__blank" th:href="@{/profile/edit}">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

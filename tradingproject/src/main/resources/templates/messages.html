@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="header.html :: head"></div>
+</head>
+<body>
+<div th:replace="header.html :: copy"></div>
+<div class="container">
+    <ul class="list-group">
+        <div th:each="conversation:${conversations}">
+            <div th:if="${conversation.getUserA().getId() == userid}">
+                <a th:href="@{/sendmessage/{usera}/{userb}(usera=${userid},userb=${conversation.getUserA().getId()})}">
+                <li class="list-group-item" > <p th:text="${conversation.getUserB().getUsername()}"></p> </li>
+                </a>
+            </div>
+            <div th:unless="${conversation.getUserA().getId() == userid}">
+                <a th:href="@{/sendmessage/{usera}/{userb}(usera=${userid},userb=${conversation.getUserA().getId()})}">
+                <li class="list-group-item" > <p th:text="${conversation.getUserA().getUsername()}"></p> </li>
+                </a>
+            </div>
+        </div>
+
+    </ul>
+</div>
+</body>
+<div th:replace="footer.html :: copy"></div>
+</html>

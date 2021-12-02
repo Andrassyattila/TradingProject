@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="header.html :: head"></div>
+</head>
+<body>
+<div th:replace="header.html :: copy"></div>
+<div class="container">
+    <div class="message-card d-flex justify-content-center " style="border: black" th:each="onemessage:${messages}">
+        <div class="card mb-3 " style="max-width: 540px;">
+            <h5 style="background: bisque" th:text="${onemessage.getAuthor().getUsername()}" class="card-header">Featured</h5>
+            <div class="row no-gutters">
+
+                <div class="col-md-4">
+                    <img th:src="@{https://pbs.twimg.com/profile_images/1141086904600989698/ZjMXo3iP_400x400.jpg}" class="card-img" alt="...">
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p th:text="${onemessage.messages}" class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small th:text="${onemessage.messageSent}" class="text-muted"></small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="form d-flex justify-content-center">
+    <form class="row g-3" th:action="@{|/sendmessage/${userA}/${userB}|}"
+          th:object="${messageobj}" method="post">
+            <textarea style="width: 490px" th:field="*{messages}" id="messages" maxlength="2000"></textarea>
+            <button class="btn btn-primary" style="width: 50px" type="submit">Send</button>
+    </form>
+    </div>
+</div>
+</body>
+<div th:replace="footer.html :: copy"></div>
+</html>

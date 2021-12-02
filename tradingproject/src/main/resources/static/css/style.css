@@ -1,0 +1,44 @@
+.cont{
+    display: flex;
+}
+.main-content{
+    width: 80%;
+    margin:10px;
+    text-align: center;
+    image-orientation: inherit;
+    display:grid;
+
+}
+.side-content{
+    width: 20%;
+    margin: 10px;
+    background: lightgrey;
+}
+.border{
+    background: lightgrey;
+    margin: 10px;
+    height: min-content;
+}
+.advimg{
+    height: 200px;
+    width: 200px;
+}
+.title{
+    position: center;
+    margin:20px;
+}
+.login button{
+    margin:5px;
+
+}
+.login{
+    text-decoration: none;
+}
+.checked{
+    color: yellow;
+}
+.row-padding{
+    padding-top: 250px;
+    padding-left: 300px;
+}
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <div th:replace="header.html :: head"></div>
+</head>
+<body>
+<div th:replace="header.html :: copy"></div>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="card">
+            <img class="card-img-top" th:src="${url}">
+            <p th:text="${product.title}"></p>
+            <p th:text="${product.description}"></p>
+            <p th:text="${product.prefPrice}"></p>
+            <form method="post" th:action="@{/moderator/product/{id}/pass(id=${product.id})}" >
+                <button type="submit"><i class="bi bi-check"></i>pass</button>
+            </form>
+            <form method="post" th:action="@{/moderator/product/{id}/delete(id=${product.id})}" >
+                <button type="submit"><i class="bi bi-check"></i>delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
